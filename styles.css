@@ -10,17 +10,20 @@
     --body-bg: #f9fafb;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --transition: all 0.3s ease;
+    --background: linear-gradient(135deg, #f9fafb, #4f46e5);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--body-bg);
+    background-image: linear-gradient( 180deg,#cedbff, #758ded, #83a4d0, #b8c6db, #16283f);
+    /* background-image: linear-gradient(to right, rgb(159, 202, 245) , rgb(177, 183, 231), rgb(90, 170, 250)); */
     color: var(--text-color);
     line-height: 1.6;
     min-height: 100vh;
