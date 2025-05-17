@@ -201,6 +201,7 @@ button {
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .result-card h2 {
@@ -265,7 +266,7 @@ button {
 }
 
 .info-card {
-    background-color: white;
+    background-color: hsl(180, 17%, 98%);
     border-radius: 12px;
     padding: 20px;
     border-left: 4px solid var(--primary-color);
