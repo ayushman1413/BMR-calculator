@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BMR Calculator</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css" />
 <body>
     <div class="container">
         <div class="calculator-card">
             <h1>BMR Calculator</h1>
             <p class="subtitle">Calculate your Basal Metabolic Rate</p>
-            
+
             <form id="bmr-form">
                 <div class="form-group">
                     <label for="gender">Gender</label>
                     <div class="gender-toggle">
-                        <input type="radio" id="male" name="gender" value="male" checked>
+                        <input type="radio" id="male" name="gender" value="male" checked />
                         <label for="male" class="radio-label">Male</label>
-                       
-                        <input type="radio" id="female" name="gender" value="female">
+
+                        <input type="radio" id="female" name="gender" value="female" />
                         <label for="female" class="radio-label">Female</label>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="age">Age</label>
-                    <input type="number" id="age" max="80" placeholder="Years" required>
+                    <input type="number" id="age" min="10" max="80" placeholder="Years" required />
                     <div id="age-error" class="error-message" style="color: red; font-size: 0.9em; margin-top: 4px;"></div>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="height">Height</label>
                         <div class="input-with-unit">
-                            <input type="number" id="height" max="250" placeholder="cm" required>
+                            <input type="number" id="height" max="250" placeholder="cm" required />
                             <span class="unit">cm</span>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="weight">Weight</label>
                         <div class="input-with-unit">
-                            <input type="number" id="weight" max="150" placeholder="kg" required>
+                            <input type="number" id="weight" max="150" placeholder="kg" required />
                             <span class="unit">kg</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="activity">Activity Level</label>
                     <select id="activity" required>
@@ -59,16 +59,16 @@
                         <option value="1.375">Lightly active (light exercise 1-3 days/week)</option>
                         <option value="1.55" selected>Moderately active (moderate exercise 3-5 days/week)</option>
                         <option value="1.725">Very active (hard exercise 6-7 days/week)</option>
-                        <option value="1.9">Extra active (very hard exercise & physical job)</option>
+                        <option value="1.9">Extra active (very hard exercise &amp; physical job)</option>
                     </select>
                 </div>
-                
+
                 <div class="button-group">
                     <button type="submit" id="calculate-btn">Calculate</button>
                     <button type="reset" id="reset-btn">Reset</button>
                 </div>
             </form>
-            
+
             <div id="result" class="result-hidden">
                 <div class="result-card">
                     <h2>Your Results</h2>

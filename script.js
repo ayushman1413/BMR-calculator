@@ -1,6 +1,4 @@
-// DOMContentLoaded event ka wait kar rahe hain, ensure karne ke liye ke HTML load ho chuka hai
 document.addEventListener('DOMContentLoaded', function() {
-    // Form, result section aur input fields ko select kar rahe hain
     const form = document.getElementById('bmr-form');
     const resultDiv = document.getElementById('result');
     const bmrValue = document.getElementById('bmr-value');
@@ -11,42 +9,70 @@ document.addEventListener('DOMContentLoaded', function() {
     const calculateBtn = document.getElementById('calculate-btn');
     const resetBtn = document.getElementById('reset-btn');
 
-    // Input validation aur formatting ke liye
+    const ageInput = document.getElementById('age');
+    const ageErrorDiv = document.getElementById('age-error');
+
     const numberInputs = document.querySelectorAll('input[type="number"]');
     numberInputs.forEach(input => {
         input.addEventListener('input', function() {
-            // Non-numeric characters ko remove kar rahe hain
             this.value = this.value.replace(/[^0-9]/g, '');
 
-            // Minimum aur Maximum value ka validation
             const min = parseInt(this.getAttribute('min'));
             const max = parseInt(this.getAttribute('max'));
 
             if (this.value !== '') {
-                if (parseInt(this.value) < min) this.value = min;
-                if (parseInt(this.value) > max) this.value = max;
+                let val = parseInt(this.value);
+                if (val < min) {
+                    this.value = min;
+                    if (this.id === 'age') {
+                        ageErrorDiv.textContent = 'Age must be 10 or above';
+                    }
+                } else if (val > max) {
+                    this.value = max;
+                    if (this.id === 'age') {
+                        ageErrorDiv.textContent = 'Age must be 80 or below';
+                    }
+                } else {
+                    if (this.id === 'age') {
+                        ageErrorDiv.textContent = '';
+                    }
+                }
+            } else {
+                if (this.id === 'age') {
+                    ageErrorDiv.textContent = '';
+                }
             }
         });
     });
 
-    // Form submit hone par BMR calculate karega
     form.addEventListener('submit', function(e) {
-        e.preventDefault(); // Form ko reload hone se rokta hai
+        e.preventDefault();
 
-        // Form se input values le rahe hain
         const gender = document.querySelector('input[name="gender"]:checked').value;
-        const age = parseInt(document.getElementById('age').value);
+        const age = parseInt(ageInput.value);
         const height = parseInt(document.getElementById('height').value);
         const weight = parseInt(document.getElementById('weight').value);
         const activityLevel = parseFloat(document.getElementById('activity').value);
 
-        // Validation, agar field empty ho to alert karega
+        // Clear previous error message
+        ageErrorDiv.textContent = '';
+
         if (!age || !height || !weight) {
             alert('Please fill in all fields');
             return;
         }
 
-        // BMR calculation 
+        // Age specific validation and error messages
+        if (age < 10) {
+            ageErrorDiv.textContent = 'Age must be 10 or above';
+            return;
+        } else if (age > 80) {
+            ageErrorDiv.textContent = 'Age must be 80 or below';
+            return;
+        } else {
+            ageErrorDiv.textContent = '';
+        }
+
         let bmr;
         if (gender === 'male') {
             bmr = 10 * weight + 6.25 * height - 5 * age + 5;
@@ -54,35 +80,27 @@ document.addEventListener('DOMContentLoaded', function() {
             bmr = 10 * weight + 6.25 * height - 5 * age - 161;
         }
 
-        // TDEE calculate karna (Total Daily Energy Expenditure)
         const tdee = Math.round(bmr * activityLevel);
+        const loss = Math.round(tdee - 500);
+        const gain = Math.round(tdee + 500);
 
-        // Calorie goals calculate karna
-        const loss = Math.round(tdee - 500); // Weight loss ke liye
-        const gain = Math.round(tdee + 500); // Weight gain ke liye
-
-        // Results ko display karna
         bmrValue.textContent = Math.round(bmr);
         tdeeValue.textContent = tdee;
         weightLoss.textContent = loss;
         maintenance.textContent = tdee;
         weightGain.textContent = gain;
 
-        // Animation ke saath result section show karna
         resultDiv.classList.remove('result-hidden');
-
-        // Smooth scroll to results section
         resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    // Reset button ke click par form reset aur result hide
     resetBtn.addEventListener('click', function() {
         resultDiv.classList.add('result-hidden');
-        form.reset(); // Form fields reset
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // Top par scroll
+        form.reset();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        ageErrorDiv.textContent = '';
     });
 
-    // Button click visual feedback ke liye
     const buttons = document.querySelectorAll('button');
     buttons.forEach(button => {
         button.addEventListener('mousedown', function() {
