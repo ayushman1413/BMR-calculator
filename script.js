@@ -44,64 +44,75 @@ document.addEventListener('DOMContentLoaded', function() {
     //         }
     //     });
     // });
-const ageinput=document.getElementById("age")
-ageinput.oninput=function(){
-    let age=parseInt(ageinput.value)
-    // console.log(age)
-    if(age>80){
-        document.getElementById("message").style.display="block"
-    }else{
-        document.getElementById("message").style.display="none"
-    }
-}
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+const ageinput = document.getElementById("age");
 
-        const gender = document.querySelector('input[name="gender"]:checked').value;
-        const age = parseInt(ageInput.value);
-        const height = parseInt(document.getElementById('height').value);
-        const weight = parseInt(document.getElementById('weight').value);
-        const activityLevel = parseFloat(document.getElementById('activity').value);
-
-        // Clear previous error message
-        ageErrorDiv.textContent = '';
-
-        if (!age || !height || !weight) {
-            alert('Please fill in all fields');
-            return;
+ageinput.oninput = function() {
+    let age = parseInt(ageinput.value);
+    if (age > 80 || age < 10) {
+        ageErrorDiv.style.display = "block";
+        if (age > 80) {
+            ageErrorDiv.textContent = "Age must be 80 or below";
+        } else {
+            ageErrorDiv.textContent = "Age must be 10 or above";
         }
+    } else {
+        ageErrorDiv.style.display = "none";
+        ageErrorDiv.textContent = "";
+    }
+};
 
-        // Age specific validation and error messages
-        // if (age < 10) {
-        //     ageErrorDiv.textContent = 'Age must be 10 or above';
-        //     return;
-        // } else if (age > 80) {
-        //     ageErrorDiv.textContent = 'Age must be 80 or below';
-        //     return;
-        // } else {
-        //     ageErrorDiv.textContent = '';
-        // }
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-        // let bmr;
-        // if (gender === 'male') {
-        //     bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-        // } else {
-        //     bmr = 10 * weight + 6.25 * height - 5 * age - 161;
-        // }
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    const age = parseInt(ageInput.value);
+    const height = parseInt(document.getElementById('height').value);
+    const weight = parseInt(document.getElementById('weight').value);
+    const activityLevel = parseFloat(document.getElementById('activity').value);
 
-        const tdee = Math.round(bmr * activityLevel);
-        const loss = Math.round(tdee - 500);
-        const gain = Math.round(tdee + 500);
+    // Clear previous error message
+    ageErrorDiv.style.display = "none";
+    ageErrorDiv.textContent = '';
 
-        bmrValue.textContent = Math.round(bmr);
-        tdeeValue.textContent = tdee;
-        weightLoss.textContent = loss;
-        maintenance.textContent = tdee;
-        weightGain.textContent = gain;
+    if (!age || !height || !weight) {
+        alert('Please fill in all fields');
+        return;
+    }
 
-        resultDiv.classList.remove('result-hidden');
-        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    // Age specific validation and error messages
+    if (age < 10) {
+        ageErrorDiv.style.display = "block";
+        ageErrorDiv.textContent = 'Age must be 10 or above';
+        return;
+    } else if (age > 80) {
+        ageErrorDiv.style.display = "block";
+        ageErrorDiv.textContent = 'Age must be 80 or below';
+        return;
+    } else {
+        ageErrorDiv.style.display = "none";
+        ageErrorDiv.textContent = '';
+    }
+
+    let bmr;
+    if (gender === 'male') {
+        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+    } else {
+        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+    }
+
+    const tdee = Math.round(bmr * activityLevel);
+    const loss = Math.round(tdee - 500);
+    const gain = Math.round(tdee + 500);
+
+    bmrValue.textContent = Math.round(bmr);
+    tdeeValue.textContent = tdee;
+    weightLoss.textContent = loss;
+    maintenance.textContent = tdee;
+    weightGain.textContent = gain;
+
+    resultDiv.classList.remove('result-hidden');
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
 
     resetBtn.addEventListener('click', function() {
         resultDiv.classList.add('result-hidden');
