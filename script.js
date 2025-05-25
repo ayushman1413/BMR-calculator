@@ -46,7 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // });
 const ageinput = document.getElementById("age");
 const heightInput = document.getElementById("height");
+const weightInput = document.getElementById("weight");
 const heightErrorDiv = document.getElementById("height-error");
+const weightErrorDiv = document.getElementById("weight-error");
 
 ageinput.oninput = function() {
     let age = parseInt(ageinput.value);
@@ -78,13 +80,28 @@ heightInput.oninput = function() {
     }
 };
 
+weightInput.oninput = function() {
+    let weight = parseInt(weightInput.value);
+    if (weight > 170 || weight < 20) {
+        weightErrorDiv.style.display = "block";
+        if (weight > 170) {
+            weightErrorDiv.textContent = "Weight must be 170 kg or below";
+        } else {
+            weightErrorDiv.textContent = "Weight must be 20 kg or above";
+        }
+    } else {
+        weightErrorDiv.style.display = "none";
+        weightErrorDiv.textContent = "";
+    }
+};
+
 form.addEventListener('submit', function(e) {
     e.preventDefault();
 
     const gender = document.querySelector('input[name="gender"]:checked').value;
     const age = parseInt(ageInput.value);
     const height = parseInt(heightInput.value);
-    const weight = parseInt(document.getElementById('weight').value);
+    const weight = parseInt(weightInput.value);
     const activityLevel = parseFloat(document.getElementById('activity').value);
 
     // Clear previous error messages
@@ -92,6 +109,8 @@ form.addEventListener('submit', function(e) {
     ageErrorDiv.textContent = '';
     heightErrorDiv.style.display = "none";
     heightErrorDiv.textContent = '';
+    weightErrorDiv.style.display = "none";
+    weightErrorDiv.textContent = '';
 
     if (!age || !height || !weight) {
         alert('Please fill in all fields');
@@ -124,6 +143,20 @@ form.addEventListener('submit', function(e) {
     } else {
         heightErrorDiv.style.display = "none";
         heightErrorDiv.textContent = '';
+    }
+
+    // Weight specific validation and error messages
+    if (weight < 20) {
+        weightErrorDiv.style.display = "block";
+        weightErrorDiv.textContent = 'Weight must be 20 kg or above';
+        return;
+    } else if (weight > 170) {
+        weightErrorDiv.style.display = "block";
+        weightErrorDiv.textContent = 'Weight must be 170 kg or below';
+        return;
+    } else {
+        weightErrorDiv.style.display = "none";
+        weightErrorDiv.textContent = '';
     }
 
     let bmr;
