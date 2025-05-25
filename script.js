@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
     //     });
     // });
 const ageinput = document.getElementById("age");
+const heightInput = document.getElementById("height");
+const heightErrorDiv = document.getElementById("height-error");
 
 ageinput.oninput = function() {
     let age = parseInt(ageinput.value);
@@ -61,18 +63,35 @@ ageinput.oninput = function() {
     }
 };
 
+heightInput.oninput = function() {
+    let height = parseInt(heightInput.value);
+    if (height > 200 || height < 100) {
+        heightErrorDiv.style.display = "block";
+        if (height > 200) {
+            heightErrorDiv.textContent = "Height must be 200 cm or below";
+        } else {
+            heightErrorDiv.textContent = "Height must be 100 cm or above";
+        }
+    } else {
+        heightErrorDiv.style.display = "none";
+        heightErrorDiv.textContent = "";
+    }
+};
+
 form.addEventListener('submit', function(e) {
     e.preventDefault();
 
     const gender = document.querySelector('input[name="gender"]:checked').value;
     const age = parseInt(ageInput.value);
-    const height = parseInt(document.getElementById('height').value);
+    const height = parseInt(heightInput.value);
     const weight = parseInt(document.getElementById('weight').value);
     const activityLevel = parseFloat(document.getElementById('activity').value);
 
-    // Clear previous error message
+    // Clear previous error messages
     ageErrorDiv.style.display = "none";
     ageErrorDiv.textContent = '';
+    heightErrorDiv.style.display = "none";
+    heightErrorDiv.textContent = '';
 
     if (!age || !height || !weight) {
         alert('Please fill in all fields');
@@ -91,6 +110,20 @@ form.addEventListener('submit', function(e) {
     } else {
         ageErrorDiv.style.display = "none";
         ageErrorDiv.textContent = '';
+    }
+
+    // Height specific validation and error messages
+    if (height < 100) {
+        heightErrorDiv.style.display = "block";
+        heightErrorDiv.textContent = 'Height must be 100 cm or above';
+        return;
+    } else if (height > 200) {
+        heightErrorDiv.style.display = "block";
+        heightErrorDiv.textContent = 'Height must be 200 cm or below';
+        return;
+    } else {
+        heightErrorDiv.style.display = "none";
+        heightErrorDiv.textContent = '';
     }
 
     let bmr;
