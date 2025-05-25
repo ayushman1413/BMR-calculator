@@ -12,39 +12,48 @@ document.addEventListener('DOMContentLoaded', function() {
     const ageInput = document.getElementById('age');
     const ageErrorDiv = document.getElementById('age-error');
 
-    const numberInputs = document.querySelectorAll('input[type="number"]');
-    numberInputs.forEach(input => {
-        input.addEventListener('input', function() {
-            this.value = this.value.replace(/[^0-9]/g, '');
+    // const numberInputs = document.querySelectorAll('input[type="number"]');
+    // numberInputs.forEach(input => {
+    //     input.addEventListener('input', function() {
+    //         this.value = this.value.replace(/[^0-9]/g, '');
 
-            const min = parseInt(this.getAttribute('min'));
-            const max = parseInt(this.getAttribute('max'));
+    //         const min = parseInt(this.getAttribute('min'));
+    //         const max = parseInt(this.getAttribute('max'));
 
-            if (this.value !== '') {
-                let val = parseInt(this.value);
-                if (val < min) {
-                    this.value = min;
-                    if (this.id === 'age') {
-                        ageErrorDiv.textContent = 'Age must be 10 or above';
-                    }
-                } else if (val > max) {
-                    this.value = max;
-                    if (this.id === 'age') {
-                        ageErrorDiv.textContent = 'Age must be 80 or below';
-                    }
-                } else {
-                    if (this.id === 'age') {
-                        ageErrorDiv.textContent = '';
-                    }
-                }
-            } else {
-                if (this.id === 'age') {
-                    ageErrorDiv.textContent = '';
-                }
-            }
-        });
-    });
-
+    //         if (this.value !== '') {
+    //             let val = parseInt(this.value);
+    //             if (val < min) {
+    //                 this.value = min;
+    //                 if (this.id === 'age') {
+    //                     ageErrorDiv.textContent = 'Age must be 10 or above';
+    //                 }
+    //             } else if (val > max) {
+    //                 this.value = max;
+    //                 if (this.id === 'age') {
+    //                     ageErrorDiv.textContent = 'Age must be 80 or below';
+    //                 }
+    //             } else {
+    //                 if (this.id === 'age') {
+    //                     ageErrorDiv.textContent = '';
+    //                 }
+    //             }
+    //         } else {
+    //             if (this.id === 'age') {
+    //                 ageErrorDiv.textContent = '';
+    //             }
+    //         }
+    //     });
+    // });
+const ageinput=document.getElementById("age")
+ageinput.oninput=function(){
+    let age=parseInt(ageinput.value)
+    // console.log(age)
+    if(age>80){
+        document.getElementById("message").style.display="block"
+    }else{
+        document.getElementById("message").style.display="none"
+    }
+}
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -63,22 +72,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Age specific validation and error messages
-        if (age < 10) {
-            ageErrorDiv.textContent = 'Age must be 10 or above';
-            return;
-        } else if (age > 80) {
-            ageErrorDiv.textContent = 'Age must be 80 or below';
-            return;
-        } else {
-            ageErrorDiv.textContent = '';
-        }
+        // if (age < 10) {
+        //     ageErrorDiv.textContent = 'Age must be 10 or above';
+        //     return;
+        // } else if (age > 80) {
+        //     ageErrorDiv.textContent = 'Age must be 80 or below';
+        //     return;
+        // } else {
+        //     ageErrorDiv.textContent = '';
+        // }
 
-        let bmr;
-        if (gender === 'male') {
-            bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-        } else {
-            bmr = 10 * weight + 6.25 * height - 5 * age - 161;
-        }
+        // let bmr;
+        // if (gender === 'male') {
+        //     bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+        // } else {
+        //     bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+        // }
 
         const tdee = Math.round(bmr * activityLevel);
         const loss = Math.round(tdee - 500);
