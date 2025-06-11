@@ -128,6 +128,7 @@ form.addEventListener('submit', function(e) {
         ageErrorDiv.style.display = "block";
         ageErrorDiv.textContent = 'Age must be 10 or above';
         return;
+           // Validate inputs again on submit
     } else if (age > 80) {
         ageErrorDiv.style.display = "block";
         ageErrorDiv.textContent = 'Age must be 80 or below';
