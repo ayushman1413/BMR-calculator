@@ -99,6 +99,7 @@ weightInput.oninput = function() {
         weightErrorDiv.textContent = "";
     }
 };
+   // Handle form submission
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();
