@@ -52,7 +52,7 @@ const heightInput = document.getElementById("height");
 const weightInput = document.getElementById("weight");
 const heightErrorDiv = document.getElementById("height-error");
 const weightErrorDiv = document.getElementById("weight-error");
-
+  // Validate age input in real-time
 ageinput.oninput = function() {
     let age = parseInt(ageinput.value);
     if (age > 80 || age < 10) {
