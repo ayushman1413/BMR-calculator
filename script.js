@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
     //         }
     //     });
     // });
+
+     // Validate age input in real-time
 const ageinput = document.getElementById("age");
 const heightInput = document.getElementById("height");
 const weightInput = document.getElementById("weight");
