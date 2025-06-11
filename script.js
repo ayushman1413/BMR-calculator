@@ -84,7 +84,7 @@ heightInput.oninput = function() {
         heightErrorDiv.textContent = "";
     }
 };
-
+  // Validate weight input in real-time
 weightInput.oninput = function() {
     let weight = parseInt(weightInput.value);
     if (weight > 170 || weight < 20) {
