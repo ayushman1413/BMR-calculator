@@ -68,6 +68,8 @@ ageinput.oninput = function() {
     }
 };
 
+    // Validate height input in real-time
+
 heightInput.oninput = function() {
     let height = parseInt(heightInput.value);
     if (height > 200 || height < 100) {
