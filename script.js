@@ -103,7 +103,7 @@ weightInput.oninput = function() {
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();
-
+ // Get user input values
     const gender = document.querySelector('input[name="gender"]:checked').value;
     const age = parseInt(ageInput.value);
     const height = parseInt(heightInput.value);
