@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+       // Form and result element references
     const form = document.getElementById('bmr-form');
     const resultDiv = document.getElementById('result');
     const bmrValue = document.getElementById('bmr-value');
